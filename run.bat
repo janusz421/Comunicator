@@ -1,0 +1,1 @@
+java -jar dist/Comunicator.jar 4444
