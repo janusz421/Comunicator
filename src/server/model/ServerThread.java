@@ -21,6 +21,11 @@ public abstract class ServerThread extends Thread {
         running = false;
     }
     
+    
+    /**
+     * Check if the thread is running
+     * @return state of thread
+     */
     public boolean isRunning() {
         return running;
     }

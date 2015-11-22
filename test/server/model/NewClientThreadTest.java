@@ -1,8 +1,3 @@
-/**
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server.model;
 
 import java.io.BufferedReader;
@@ -17,13 +12,22 @@ import static org.junit.Assert.*;
 import server.exceptions.StandardServerException;
 
 /**
- *
- * @author janus
+ * Test class for client thread
+ * @author Janusz Czornik
  */
 public class NewClientThreadTest {
     
+    /**
+     * Standard constructor
+     */
     public NewClientThreadTest() {
     }
+    
+     /**
+     * Runs before every single method in this class
+     * @throws server.exceptions.StandardServerException
+     * @throws java.io.IOException
+     */
     
     @Before
     public void setUp() throws StandardServerException, IOException {
@@ -34,6 +38,13 @@ public class NewClientThreadTest {
         clientSocket = new Socket("localhost", 3333);
     }
     
+     /**
+     * Runs after every single method in this class
+     * @throws server.exceptions.StandardServerException
+     * @throws java.io.IOException
+     * @throws java.lang.InterruptedException
+     */
+    
     @After
     public void tearDown() throws StandardServerException, IOException, InterruptedException {
         serverConf.stopServer();
@@ -42,6 +53,7 @@ public class NewClientThreadTest {
 
     /**
      * Test of terminate method, of class NewClientThread.
+     * @throws java.lang.Exception
      */
     @Test
     public void testTerminate() throws Exception {
@@ -95,6 +107,14 @@ public class NewClientThreadTest {
             fail("Cannot create an instance of NewClientThread");
         }
     }
+    
+    /**
+     * Socket for listen on
+     */
     private ServerConfiguration serverConf;
+    
+    /**
+     * Socket to comunicate throw
+     */
     private Socket clientSocket;
 }

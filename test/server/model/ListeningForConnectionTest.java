@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server.model;
 
 import java.io.BufferedReader;
@@ -18,19 +13,34 @@ import org.junit.Before;
 import server.exceptions.StandardServerException;
 
 /**
- *
- * @author januszczornik
+ * Test class for listening for connections
+ * @author janusz czornik
  */
 public class ListeningForConnectionTest {
+    
+    /**
+     * Standard constructor
+     */
     
     public ListeningForConnectionTest() {
     }
     
+    /**
+     * Runs before every single method in this class
+     * @throws StandardServerException
+     * @throws IOException 
+     */
     @Before
     public void setUp() throws StandardServerException, IOException {
         serverSocket = new ServerSocket(2222);
     }
     
+    /**
+     * Runs after every single method in this class
+     * @throws StandardServerException
+     * @throws IOException
+     * @throws InterruptedException 
+     */
     @After
     public void tearDown() throws StandardServerException, IOException, InterruptedException {
         serverSocket.close();
@@ -48,12 +58,13 @@ public class ListeningForConnectionTest {
         instance.terminate();
         instance.join();
         if(instance.isRunning())
-            fail("The test case is a prototype.");
+            fail("Terminate failed");
     }
 
     /**
      * Test of terminateWithLambda method, of class ListeningForConnection.
      * @throws server.exceptions.StandardServerException
+     * @throws java.lang.InterruptedException
      */
     @Test
     public void testTerminateWithLambda() throws StandardServerException, InterruptedException {
@@ -62,7 +73,7 @@ public class ListeningForConnectionTest {
         instance.terminateWithLambda();
         instance.join();
         if(instance.isRunning())
-            fail("The test case is a prototype.");
+            fail("terminateWithLambda failed");
     }
 
     /**
@@ -86,6 +97,9 @@ public class ListeningForConnectionTest {
         }
     }
     
+    /**
+     * server socket used to listen on
+     */
     private ServerSocket serverSocket;
     
 }
