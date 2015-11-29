@@ -1,3 +1,4 @@
+import client.view.ClientView;
 import server.view.ServerView;
 import server.model.ServerConfiguration;
 import server.controller.ServerController;
@@ -20,6 +21,8 @@ public class Comunicator {
         ServerConfiguration serverConf = new ServerConfiguration(args);
         ServerController serverController = new ServerController(serverView, serverConf);
         InfoView infoView = new InfoView();
+        ClientView clientView = new ClientView();
+        clientView.setVisible(true);
         
         serverView.setVisible(true);
         infoView.setVisible(true);
