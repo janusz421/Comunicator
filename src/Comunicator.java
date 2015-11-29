@@ -1,4 +1,8 @@
+import client.model.ListOfFriends;
 import client.view.ClientView;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.view.ServerView;
 import server.model.ServerConfiguration;
 import server.controller.ServerController;
@@ -26,6 +30,7 @@ public class Comunicator {
         
         serverView.setVisible(true);
         infoView.setVisible(true);
+        
     }
     
 }
