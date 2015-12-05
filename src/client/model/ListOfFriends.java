@@ -34,10 +34,6 @@ public class ListOfFriends {
                 listOfFriends.add(new Friend(data[0], data[1], data[2]));
             }
         }
-        
-        for(Friend f : listOfFriends) {
-            System.out.println(f.getName());
-        }
     }
     
     public HashSet<Friend> getListOfFriends() {

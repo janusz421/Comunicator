@@ -7,6 +7,8 @@ package client.view;
 
 import client.model.Friend;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -24,8 +27,8 @@ import javax.swing.tree.TreeSelectionModel;
 public class ClientView extends JFrame {
     private JTree tree;
     private DefaultMutableTreeNode top;
-    private Set<DefaultMutableTreeNode> groupNodes;
-    private Set<DefaultMutableTreeNode> friendNodes;
+    private HashSet<DefaultMutableTreeNode> groupNodes;
+    private HashSet<DefaultMutableTreeNode> friendNodes;
     private JMenuBar menuBar;
     private JMenuItem addFriend;
     private JMenuItem addGroup;
@@ -59,8 +62,34 @@ public class ClientView extends JFrame {
     }
     
     private void initTree() {
+        groupNodes = new HashSet<>();
         top = new DefaultMutableTreeNode("Friends");
         tree = new JTree(top);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+    }
+    
+    public HashSet<DefaultMutableTreeNode> getGroups() {
+        return groupNodes;
+    }
+    
+    public void addNodes(HashSet<String> nodes) {
+        nodes.stream().forEach((nodeName) -> {
+            groupNodes.add(new DefaultMutableTreeNode(nodeName));
+        });
+        
+        groupNodes.stream().forEach((node) -> {
+            top.add(node);
+        });
+    }
+    
+    public void addNodes(HashSet<String> nodes, String parentNodeName) {
+        for (DefaultMutableTreeNode object : groupNodes) {
+            if(parentNodeName.equals(object.toString())) {
+                nodes.stream().forEach((node) -> {
+                    object.add(new DefaultMutableTreeNode(node));
+                });
+                break;
+            }
+        }
     }
 }
