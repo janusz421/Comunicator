@@ -1,3 +1,4 @@
+import client.controller.ClientController;
 import client.model.ListOfFriends;
 import client.view.ClientView;
 import java.io.IOException;
@@ -26,6 +27,12 @@ public class Comunicator {
         ServerController serverController = new ServerController(serverView, serverConf);
         InfoView infoView = new InfoView();
         ClientView clientView = new ClientView();
+        try {
+            ListOfFriends listOfFriends = new ListOfFriends();
+            ClientController clientController = new ClientController(clientView, listOfFriends);
+        } catch (IOException ex) {
+            Logger.getLogger(Comunicator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         clientView.setVisible(true);
         
         serverView.setVisible(true);

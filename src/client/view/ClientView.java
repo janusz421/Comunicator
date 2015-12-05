@@ -26,7 +26,6 @@ public class ClientView extends JFrame {
     private DefaultMutableTreeNode top;
     private Set<DefaultMutableTreeNode> groupNodes;
     private Set<DefaultMutableTreeNode> friendNodes;
-    private ArrayList<Friend> listOfDriends;
     private JMenuBar menuBar;
     private JMenuItem addFriend;
     private JMenuItem addGroup;

@@ -11,19 +11,19 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  *
  * @author janus
  */
 public class ListOfFriends {
-    private ArrayList<Friend> listOfFriends;
+    private HashSet<Friend> listOfFriends;
     private final BufferedReader READER;
     private final Path PATH_TO_FILE = Paths.get("C:\\Users\\janus\\Documents\\NetBeansProjects\\Comunicator\\src\\client\\model\\friends");
     
     public ListOfFriends() throws IOException {
-        listOfFriends = new ArrayList<>();
+        listOfFriends = new HashSet<>();
         System.out.println(PATH_TO_FILE.toString());
         READER = Files.newBufferedReader(PATH_TO_FILE, Charset.defaultCharset());
         String line;
@@ -34,9 +34,13 @@ public class ListOfFriends {
                 listOfFriends.add(new Friend(data[0], data[1], data[2]));
             }
         }
+        
+        for(Friend f : listOfFriends) {
+            System.out.println(f.getName());
+        }
     }
     
-    public ArrayList<Friend> getListOfFriends() {
+    public HashSet<Friend> getListOfFriends() {
         return listOfFriends;
     }
 }

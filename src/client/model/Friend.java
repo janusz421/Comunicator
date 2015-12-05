@@ -5,6 +5,8 @@
  */
 package client.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author janus
@@ -34,5 +36,20 @@ public class Friend {
     
     public void setState(String state) {
         this.state = state;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(obj.getClass() != this.getClass())
+            return false;
+        Friend object = (Friend)obj;
+        return (this.name == null ? object.getName() == null : this.name.equals(object.getName()));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        return hash;
     }
 }
