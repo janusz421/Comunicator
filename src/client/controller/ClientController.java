@@ -39,6 +39,13 @@ public class ClientController {
             });
             clientView.addNodes(friendsToAdd, group);
         });
+        
+        HashSet<String> friendsToAddWithoutGroups = new HashSet<>();
+        friends.stream().forEach((friend) -> {
+            friendsToAddWithoutGroups.add(friend.getName());
+        });
+        
+        clientView.addNodesWithoutGropus(friendsToAddWithoutGroups);
     }
     
     

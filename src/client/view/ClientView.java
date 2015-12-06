@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -20,7 +21,10 @@ import javax.swing.tree.TreeSelectionModel;
  * @author janus
  */
 public class ClientView extends JFrame {
+    private JTabbedPane tabbedPane;
+    private JTree treeWithoutGroups;
     private JTree tree;
+    private DefaultMutableTreeNode topWithoutGroups;
     private DefaultMutableTreeNode top;
     private HashSet<DefaultMutableTreeNode> groupNodes;
     private HashSet<DefaultMutableTreeNode> friendNodes;
@@ -37,9 +41,18 @@ public class ClientView extends JFrame {
     
     private void initComponents() {
         initMenu();
+        initTabbedPane();
         initTree();
+        initTreeWithoutGroups();
         JScrollPane treeScrollPanel = new JScrollPane(tree);
-        this.add(treeScrollPanel);
+        JScrollPane treeWithoutGroupsPanel = new JScrollPane(treeWithoutGroups);
+        tabbedPane.addTab("List with groups",treeScrollPanel);
+        tabbedPane.addTab("List without groups", treeWithoutGroupsPanel);
+        this.add(tabbedPane);
+    }
+    
+    private void initTabbedPane() {
+        tabbedPane = new JTabbedPane();
     }
     
     private void initMenu() {
@@ -60,6 +73,12 @@ public class ClientView extends JFrame {
         groupNodes = new HashSet<>();
         top = new DefaultMutableTreeNode("Friends");
         tree = new JTree(top);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+    }
+    
+    private void initTreeWithoutGroups() {
+        topWithoutGroups = new DefaultMutableTreeNode("Friends");
+        treeWithoutGroups = new JTree(topWithoutGroups);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
     
@@ -86,5 +105,13 @@ public class ClientView extends JFrame {
                 break;
             }
         }
+    }
+    
+    public void addNodesWithoutGropus(HashSet<String> friends) {
+        friends.stream().forEach(
+                (friend) -> {
+                    topWithoutGroups.add(new DefaultMutableTreeNode(friend));
+                }
+        );
     }
 }
