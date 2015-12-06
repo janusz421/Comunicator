@@ -20,11 +20,11 @@ import java.util.HashSet;
 public class ListOfFriends {
     private HashSet<Friend> listOfFriends;
     private final BufferedReader READER;
-    private final Path PATH_TO_FILE = Paths.get("C:\\Users\\janus\\Documents\\NetBeansProjects\\Comunicator\\src\\client\\model\\friends");
+    private final String PATH_TO_CONTACTS = "src\\client\\model\\friends";
+    private final Path PATH_TO_FILE = Paths.get(PATH_TO_CONTACTS);
     
     public ListOfFriends() throws IOException {
         listOfFriends = new HashSet<>();
-        System.out.println(PATH_TO_FILE.toString());
         READER = Files.newBufferedReader(PATH_TO_FILE, Charset.defaultCharset());
         String line;
         while((line = READER.readLine())!= null) {
