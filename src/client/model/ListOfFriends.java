@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.model;
 
 import java.io.BufferedReader;
@@ -14,15 +9,34 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 
 /**
- *
- * @author janus
+ * Class for list of friends
+ * @author Janusz Czornik
  */
 public class ListOfFriends {
+    
+    /**
+     * containing a list of friends
+     */
     private HashSet<Friend> listOfFriends;
+    /**
+     * Reader for file with contacts
+     */
     private final BufferedReader READER;
+    
+    /**
+     * path to contacts
+     */
     private final String PATH_TO_CONTACTS = "src\\client\\model\\friends";
+    /**
+     * path object
+     */
     private final Path PATH_TO_FILE = Paths.get(PATH_TO_CONTACTS);
     
+    
+    /**
+     * Constructor
+     * @throws IOException if cannot open file
+     */
     public ListOfFriends() throws IOException {
         listOfFriends = new HashSet<>();
         READER = Files.newBufferedReader(PATH_TO_FILE, Charset.defaultCharset());
@@ -36,6 +50,11 @@ public class ListOfFriends {
         }
     }
     
+    
+    /**
+     * get a list of friends
+     * @return list of friends
+     */
     public HashSet<Friend> getListOfFriends() {
         return listOfFriends;
     }
