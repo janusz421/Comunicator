@@ -1,24 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.controller;
 
 import client.model.Friend;
 import client.model.ListOfFriends;
 import client.view.ClientView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 
 /**
- *
- * @author janus
+ * Controlls comunication between View and Model
+ * @author Janusz Czornik
  */
 public class ClientController {
+    
+    /**
+     * List of friends
+     */
     private final ListOfFriends listOfFriends;
+    
+    /**
+     * reference to clientView
+     */
     private final ClientView clientView;
+    
+    /**
+     * set that contains group names
+     */
     private HashSet<String> groups;
     
+    
+    /**
+     * Constructor for controller
+     * @param clientView reference to VlientView
+     * @param listOfFriends reference to ListofFriends
+     */
     public ClientController(ClientView clientView, ListOfFriends listOfFriends) {
         this.clientView = clientView;
         this.listOfFriends = listOfFriends;
@@ -46,7 +61,49 @@ public class ClientController {
         });
         
         clientView.addNodesWithoutGropus(friendsToAddWithoutGroups);
+        
+        clientView.addNewFriendListener(new AddNewFriendListener());
+        clientView.addNewGroupListener(new AddNewGroupListener());
+        clientView.addMenageGroupListener(new AddMenageGroupListener());
     }
     
+    
+    /**
+     * Class for adding a new friend
+     */
+    private class AddNewFriendListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Add Friends");
+        }
+    
+    }
+    
+    
+    /**
+     * Class for Adding a new group
+     */
+    private class AddNewGroupListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Add Groups");
+        }
+    
+    }
+    
+    
+    /**
+     * Class for managing a group
+     */
+    private class AddMenageGroupListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Manage Groups");
+        }
+    
+    }
     
 }

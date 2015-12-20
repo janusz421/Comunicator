@@ -5,6 +5,7 @@
  */
 package client.view;
 
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -113,5 +114,17 @@ public class ClientView extends JFrame {
                     topWithoutGroups.add(new DefaultMutableTreeNode(friend));
                 }
         );
+    }
+    
+    public void addNewFriendListener(ActionListener e) {
+        addFriend.addActionListener(e);
+    }
+    
+    public void addNewGroupListener(ActionListener e) {
+        addGroup.addActionListener(e);
+    }
+    
+    public void addMenageGroupListener(ActionListener e) {
+        menageGroups.addActionListener(e);
     }
 }
