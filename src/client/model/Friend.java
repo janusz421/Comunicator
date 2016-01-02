@@ -5,6 +5,7 @@ import java.util.Objects;
 /**
  * Contains information about contact
  * @author Janusz Czornik
+ * @version 1.0
  */
 public class Friend {
     /**

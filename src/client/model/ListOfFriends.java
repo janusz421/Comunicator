@@ -11,6 +11,7 @@ import java.util.HashSet;
 /**
  * Class for list of friends
  * @author Janusz Czornik
+ * @version 1.0
  */
 public class ListOfFriends {
     

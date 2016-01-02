@@ -13,8 +13,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
 /**
- *
- * @author janus
+ * Client view
+ * @author Janusz Czornik
+ * @version 1.0
  */
 public class ClientView extends JFrame {
     private JTabbedPane tabbedPane;

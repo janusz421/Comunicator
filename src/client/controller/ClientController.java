@@ -10,6 +10,7 @@ import java.util.HashSet;
 /**
  * Controlls comunication between View and Model
  * @author Janusz Czornik
+ * @version 1.0
  */
 public class ClientController {
     
