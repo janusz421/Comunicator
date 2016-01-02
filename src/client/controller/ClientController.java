@@ -3,6 +3,7 @@ package client.controller;
 import client.model.Friend;
 import client.model.ListOfFriends;
 import client.view.ClientView;
+import client.view.NewFriendWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
@@ -29,6 +30,8 @@ public class ClientController {
      */
     private HashSet<String> groups;
     
+    private NewFriendWindow nfw;
+    
     
     /**
      * Constructor for controller
@@ -38,6 +41,7 @@ public class ClientController {
     public ClientController(ClientView clientView, ListOfFriends listOfFriends) {
         this.clientView = clientView;
         this.listOfFriends = listOfFriends;
+        this.nfw = new NewFriendWindow();
         groups = new HashSet<>();
         
         listOfFriends.getListOfFriends().stream().forEach((f) -> {
@@ -76,7 +80,7 @@ public class ClientController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Add Friends");
+            nfw.setVisible(true);
         }
     
     }
