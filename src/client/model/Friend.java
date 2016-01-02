@@ -62,6 +62,7 @@ public class Friend {
     
     /**
      * Set state
+     * @param state state
      */
     public void setState(String state) {
         this.state = state;

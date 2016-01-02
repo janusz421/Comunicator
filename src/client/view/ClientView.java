@@ -30,6 +30,9 @@ public class ClientView extends JFrame {
     private JMenuItem addGroup;
     private JMenuItem menageGroups;
     
+    /**
+     * constructor
+     */
     public ClientView() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -79,10 +82,18 @@ public class ClientView extends JFrame {
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
     
+    /**
+     *
+     * @return
+     */
     public HashSet<DefaultMutableTreeNode> getGroups() {
         return groupNodes;
     }
     
+    /**
+     *
+     * @param nodes
+     */
     public void addNodes(HashSet<String> nodes) {
         nodes.stream().forEach((nodeName) -> {
             groupNodes.add(new DefaultMutableTreeNode(nodeName));
@@ -93,6 +104,11 @@ public class ClientView extends JFrame {
         });
     }
     
+    /**
+     *
+     * @param nodes
+     * @param parentNodeName
+     */
     public void addNodes(HashSet<String> nodes, String parentNodeName) {
         for (DefaultMutableTreeNode object : groupNodes) {
             if(parentNodeName.equals(object.toString())) {
@@ -104,6 +120,10 @@ public class ClientView extends JFrame {
         }
     }
     
+    /**
+     *
+     * @param friends
+     */
     public void addNodesWithoutGropus(HashSet<String> friends) {
         friends.stream().forEach(
                 (friend) -> {
@@ -112,14 +132,26 @@ public class ClientView extends JFrame {
         );
     }
     
+    /**
+     *
+     * @param e
+     */
     public void addNewFriendListener(ActionListener e) {
         addFriend.addActionListener(e);
     }
     
+    /**
+     *
+     * @param e
+     */
     public void addNewGroupListener(ActionListener e) {
         addGroup.addActionListener(e);
     }
     
+    /**
+     *
+     * @param e
+     */
     public void addMenageGroupListener(ActionListener e) {
         menageGroups.addActionListener(e);
     }
