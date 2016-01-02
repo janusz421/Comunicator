@@ -124,6 +124,7 @@ public class ClientController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            nfw.clearInput();
             nfw.dispose();
         }
         

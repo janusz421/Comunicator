@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.view;
 
 import java.awt.Dimension;
@@ -16,27 +11,66 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author janus
+ * New friend window
+ * @author Janusz Czornik
+ * @version 1.0
  */
 public class NewFriendWindow extends JFrame {
+    /**
+     * first row
+     */
     private final JPanel firstRow;
+    /**
+     * second row
+     */
     private final JPanel secondRow;
+    /**
+     * third row
+     */
     private final JPanel thirdRow;
+    /**
+     * row for buttons
+     */
     private final JPanel buttonRow;
     
+    /**
+     * label for name
+     */
     private final JLabel firstName;
+    /**
+     * label for lastname
+     */
     private final JLabel lastName;
+    /**
+     * name for group
+     */
     private final JLabel group;
     
+    /**
+     * field for name
+     */
     private final JTextField firstNameField;
+    /**
+     * field for lastname
+     */
     private final JTextField lastNameField;
+    /**
+     * field for group
+     */
     private final JTextField groupField;
     
+    /**
+     * button to save
+     */
     private final JButton saveButton;
+    /**
+     * button to cancel
+     */
     private final JButton cancelButton;
     
-    
+    /**
+     * constructor for NewFriendWindow
+     */
     public NewFriendWindow() {
         this.setLayout(new GridLayout(4, 0, 0,10));
         firstRow = new JPanel();
@@ -92,10 +126,29 @@ public class NewFriendWindow extends JFrame {
         this.setResizable(false);
     }
     
+    
+    /**
+     * Clear text fields
+     */
+    public void clearInput() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        groupField.setText("");
+    }
+    
+    
+    /**
+     * Adding a listener to save button
+     * @param e listener
+     */
     public void addSaveButtonListener(ActionListener e) {
         saveButton.addActionListener(e);
     }
     
+    /**
+     * Adding a listener to cancel button
+     * @param e listener
+     */
     public void addCancelButtonListener(ActionListener e) {
         cancelButton.addActionListener(e);
     }
