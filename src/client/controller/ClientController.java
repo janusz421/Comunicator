@@ -30,7 +30,10 @@ public class ClientController {
      */
     private HashSet<String> groups;
     
-    private NewFriendWindow nfw;
+    /**
+     * window to add new Friend
+     */
+    private final NewFriendWindow nfw;
     
     
     /**
@@ -70,6 +73,8 @@ public class ClientController {
         clientView.addNewFriendListener(new AddNewFriendListener());
         clientView.addNewGroupListener(new AddNewGroupListener());
         clientView.addMenageGroupListener(new AddMenageGroupListener());
+        
+        nfw.addCancelButtonListener(new CancelButtonListenerForNfw());
     }
     
     
@@ -109,6 +114,19 @@ public class ClientController {
             System.out.println("Manage Groups");
         }
     
+    }
+    
+    
+    /**
+     * Class for closing the nfw window
+     */
+    private class CancelButtonListenerForNfw implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            nfw.dispose();
+        }
+        
     }
     
 }
