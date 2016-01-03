@@ -21,7 +21,6 @@ public class Comunicator {
      * @param args the command line arguments (should be number of port to open and listen on)
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         ServerView serverView = new ServerView();
         ServerConfiguration serverConf = new ServerConfiguration(args);
         ServerController serverController = new ServerController(serverView, serverConf);

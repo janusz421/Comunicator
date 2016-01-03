@@ -18,17 +18,47 @@ import javax.swing.tree.TreeSelectionModel;
  * @version 1.0
  */
 public class ClientView extends JFrame {
+    /**
+     * tabbed panel
+     */
     private JTabbedPane tabbedPane;
+    /**
+     * tree without groups
+     */
     private JTree treeWithoutGroups;
+    /**
+     * tree
+     */
     private JTree tree;
+    /**
+     * top node without groups
+     */
     private DefaultMutableTreeNode topWithoutGroups;
+    /**
+     * top node
+     */
     private DefaultMutableTreeNode top;
+    /**
+     * nodes of groups
+     */
     private HashSet<DefaultMutableTreeNode> groupNodes;
+    /**
+     * nodes of fiends
+     */
     private HashSet<DefaultMutableTreeNode> friendNodes;
+    
+    /**
+     * menu bar
+     */
     private JMenuBar menuBar;
+    /**
+     * Menu item to add friend
+     */
     private JMenuItem addFriend;
+    /**
+     * Menu item to add group
+     */
     private JMenuItem addGroup;
-    private JMenuItem menageGroups;
     
     /**
      * constructor
@@ -39,6 +69,9 @@ public class ClientView extends JFrame {
         this.setSize(450, 260);
     }
     
+    /**
+     * Init components for window
+     */
     private void initComponents() {
         initMenu();
         initTabbedPane();
@@ -51,10 +84,17 @@ public class ClientView extends JFrame {
         this.add(tabbedPane);
     }
     
+    
+    /**
+     * Init tabbed panel
+     */
     private void initTabbedPane() {
         tabbedPane = new JTabbedPane();
     }
     
+    /**
+     * Init menu
+     */
     private void initMenu() {
         menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -62,13 +102,14 @@ public class ClientView extends JFrame {
         
         addFriend = new JMenuItem("Add new friend");
         addGroup = new JMenuItem("Add new group");
-        menageGroups = new JMenuItem("Menage goups");
         menu.add(addFriend);
         menu.add(addGroup);
-        menu.add(menageGroups);
         this.setJMenuBar(menuBar);
     }
     
+    /**
+     * Init tree
+     */
     private void initTree() {
         groupNodes = new HashSet<>();
         top = new DefaultMutableTreeNode("Friends");
@@ -83,16 +124,16 @@ public class ClientView extends JFrame {
     }
     
     /**
-     *
-     * @return
+     * Get set of groups
+     * @return group nodes
      */
     public HashSet<DefaultMutableTreeNode> getGroups() {
         return groupNodes;
     }
     
     /**
-     *
-     * @param nodes
+     * Adding nodes
+     * @param nodes nodes to add
      */
     public void addNodes(HashSet<String> nodes) {
         nodes.stream().forEach((nodeName) -> {
@@ -105,9 +146,9 @@ public class ClientView extends JFrame {
     }
     
     /**
-     *
-     * @param nodes
-     * @param parentNodeName
+     * Adding nodes to given parent node
+     * @param nodes nodes to add
+     * @param parentNodeName name of parent node
      */
     public void addNodes(HashSet<String> nodes, String parentNodeName) {
         for (DefaultMutableTreeNode object : groupNodes) {
@@ -121,8 +162,8 @@ public class ClientView extends JFrame {
     }
     
     /**
-     *
-     * @param friends
+     * Adding nodes to view without group
+     * @param friends nodes to add
      */
     public void addNodesWithoutGropus(HashSet<String> friends) {
         friends.stream().forEach(
@@ -133,26 +174,18 @@ public class ClientView extends JFrame {
     }
     
     /**
-     *
-     * @param e
+     * Adding listener to new friend
+     * @param e action listener
      */
     public void addNewFriendListener(ActionListener e) {
         addFriend.addActionListener(e);
     }
     
     /**
-     *
-     * @param e
+     * Adding new group listener
+     * @param e action listener
      */
     public void addNewGroupListener(ActionListener e) {
         addGroup.addActionListener(e);
-    }
-    
-    /**
-     *
-     * @param e
-     */
-    public void addMenageGroupListener(ActionListener e) {
-        menageGroups.addActionListener(e);
     }
 }

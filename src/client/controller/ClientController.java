@@ -4,6 +4,7 @@ import client.model.Friend;
 import client.model.ListOfFriends;
 import client.view.ClientView;
 import client.view.NewFriendWindow;
+import client.view.NewGroupWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
@@ -18,22 +19,27 @@ public class ClientController {
     /**
      * List of friends
      */
-    private final ListOfFriends listOfFriends;
+    private final ListOfFriends LIST_OF_FRIENDS;
     
     /**
-     * reference to clientView
+     * reference to CLIENT_VIEW
      */
-    private final ClientView clientView;
+    private final ClientView CLIENT_VIEW;
     
     /**
      * set that contains group names
      */
-    private HashSet<String> groups;
+    private HashSet<String> GROUPS;
     
     /**
      * window to add new Friend
      */
-    private final NewFriendWindow nfw;
+    private final NewFriendWindow NFW;
+    
+    /**
+     * widow to add group
+     */
+    private final NewGroupWindow NGW;
     
     
     /**
@@ -42,25 +48,26 @@ public class ClientController {
      * @param listOfFriends reference to ListofFriends
      */
     public ClientController(ClientView clientView, ListOfFriends listOfFriends) {
-        this.clientView = clientView;
-        this.listOfFriends = listOfFriends;
-        this.nfw = new NewFriendWindow();
-        groups = new HashSet<>();
+        this.CLIENT_VIEW = clientView;
+        this.LIST_OF_FRIENDS = listOfFriends;
+        this.NFW = new NewFriendWindow();
+        this.NGW = new NewGroupWindow();
+        GROUPS = new HashSet<>();
         
-        listOfFriends.getListOfFriends().stream().forEach((f) -> {
-            groups.add(f.getGroup());
+        LIST_OF_FRIENDS.getListOfFriends().stream().forEach((f) -> {
+            GROUPS.add(f.getGroup());
         });
         
-        clientView.addNodes(groups);
+        CLIENT_VIEW.addNodes(GROUPS);
         
-        HashSet<Friend> friends = listOfFriends.getListOfFriends();
+        HashSet<Friend> friends = LIST_OF_FRIENDS.getListOfFriends();
         
-        groups.stream().forEach((group) -> {
+        GROUPS.stream().forEach((group) -> {
             HashSet<String> friendsToAdd = new HashSet<>();
             friends.stream().filter((f) -> (f.getGroup().equals(group))).forEach((f) -> {
                 friendsToAdd.add(f.getName());
             });
-            clientView.addNodes(friendsToAdd, group);
+            CLIENT_VIEW.addNodes(friendsToAdd, group);
         });
         
         HashSet<String> friendsToAddWithoutGroups = new HashSet<>();
@@ -68,13 +75,12 @@ public class ClientController {
             friendsToAddWithoutGroups.add(friend.getName());
         });
         
-        clientView.addNodesWithoutGropus(friendsToAddWithoutGroups);
+        CLIENT_VIEW.addNodesWithoutGropus(friendsToAddWithoutGroups);
         
-        clientView.addNewFriendListener(new AddNewFriendListener());
-        clientView.addNewGroupListener(new AddNewGroupListener());
-        clientView.addMenageGroupListener(new AddMenageGroupListener());
+        CLIENT_VIEW.addNewFriendListener(new AddNewFriendListener());
+        CLIENT_VIEW.addNewGroupListener(new AddNewGroupListener());
         
-        nfw.addCancelButtonListener(new CancelButtonListenerForNfw());
+        NFW.addCancelButtonListener(new CancelButtonListenerForNfw());
     }
     
     
@@ -85,7 +91,7 @@ public class ClientController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            nfw.setVisible(true);
+            NFW.setVisible(true);
         }
     
     }
@@ -98,34 +104,21 @@ public class ClientController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Add Groups");
+            NGW.setVisible(true);
         }
     
     }
     
     
     /**
-     * Class for managing a group
-     */
-    private class AddMenageGroupListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Manage Groups");
-        }
-    
-    }
-    
-    
-    /**
-     * Class for closing the nfw window
+     * Class for closing the NFW window
      */
     private class CancelButtonListenerForNfw implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            nfw.clearInput();
-            nfw.dispose();
+            NFW.clearInput();
+            NFW.dispose();
         }
         
     }

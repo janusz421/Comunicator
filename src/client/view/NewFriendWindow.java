@@ -115,11 +115,6 @@ public class NewFriendWindow extends JFrame {
         this.add(thirdRow);
         this.add(buttonRow);
         
-        firstRow.setLocation(0, 0);
-        secondRow.setLocation(0, 50);
-        thirdRow.setLocation(0, 100);
-        buttonRow.setLocation(0, 150);
-        
         
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(400, 200);
