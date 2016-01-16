@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import protocols.ServerProtocol;
 import server.exceptions.StandardServerException;
 
 /**
@@ -31,6 +32,8 @@ public class NewClientThread extends ServerThread{
      */
     private final BufferedReader in;
     
+    private final ServerProtocol protocol;
+    
     
     /**
      * Sets the value of client socket and inicialized out and in streams
@@ -42,6 +45,7 @@ public class NewClientThread extends ServerThread{
         this.clientMessage = "";
         out = new PrintWriter(this.clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+        protocol = new ServerProtocol(out, in);
     }
     
     /**
@@ -83,7 +87,7 @@ public class NewClientThread extends ServerThread{
     public void run() {
         while(running) {
             try {
-                clientMessage += in.readLine();
+                clientMessage += protocol.startComunication();
                 out.println(clientMessage);
             } catch (IOException ex) {
                 return;

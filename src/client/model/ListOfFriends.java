@@ -33,6 +33,8 @@ public class ListOfFriends {
      */
     private final Path PATH_TO_FILE = Paths.get(PATH_TO_CONTACTS);
     
+    private final int ROWS = 3;
+    
     
     /**
      * Constructor
@@ -45,7 +47,7 @@ public class ListOfFriends {
         while((line = READER.readLine())!= null) {
             String[] data;
             data = line.split(" ");
-            if(data.length == 3) {
+            if(data.length == ROWS) {
                 listOfFriends.add(new Friend(data[0], data[1], data[2]));
             }
         }
