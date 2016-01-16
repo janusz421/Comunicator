@@ -7,7 +7,10 @@ import client.view.NewFriendWindow;
 import client.view.NewGroupWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
+import javax.swing.JTree;
 
 /**
  * Controlls comunication between View and Model
@@ -79,6 +82,7 @@ public class ClientController {
         
         CLIENT_VIEW.addNewFriendListener(new AddNewFriendListener());
         CLIENT_VIEW.addNewGroupListener(new AddNewGroupListener());
+        CLIENT_VIEW.addTreeListener(new TreeListener());
         
         NFW.addCancelButtonListener(new CancelButtonListenerForNfw());
     }
@@ -121,6 +125,33 @@ public class ClientController {
             NFW.dispose();
         }
         
+    } 
+    
+    private class TreeListener extends MouseAdapter {
+        private final JTree tree = CLIENT_VIEW.getTree();
+        
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selRow = tree.getRowForLocation(e.getX(), e.getY());
+                if(selRow != -1) {
+                    if(e.getClickCount() == 2) {
+                        String path[] = tree.getPathForRow(selRow).toString().replace("[", "").replace("]", "").replace(" ", "").split(",");
+                        String node = path[path.length -1];
+                        boolean isNode = false;
+                        HashSet<Friend> friendsList = LIST_OF_FRIENDS.getListOfFriends();
+                        for(Friend friend : friendsList) {
+                            if(friend.getName().equals(node)) {
+                                isNode = true;
+                                break;
+                            }
+                        }
+                        
+                        if(isNode) {
+                            System.out.println(node);
+                        }
+                    }
+                }
+            }
     }
     
 }

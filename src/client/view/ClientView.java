@@ -1,6 +1,7 @@
 package client.view;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -173,6 +174,10 @@ public class ClientView extends JFrame {
         );
     }
     
+    public JTree getTree() {
+        return this.tree;
+    }
+    
     /**
      * Adding listener to new friend
      * @param e action listener
@@ -187,5 +192,9 @@ public class ClientView extends JFrame {
      */
     public void addNewGroupListener(ActionListener e) {
         addGroup.addActionListener(e);
+    }
+    
+    public void addTreeListener(MouseAdapter e) {
+        tree.addMouseListener(e);
     }
 }
