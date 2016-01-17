@@ -61,6 +61,8 @@ public class ClientView extends JFrame {
      */
     private JMenuItem addGroup;
     
+    private JMenuItem connect;
+    
     /**
      * constructor
      */
@@ -103,8 +105,10 @@ public class ClientView extends JFrame {
         
         addFriend = new JMenuItem("Add new friend");
         addGroup = new JMenuItem("Add new group");
+        connect = new JMenuItem("Connect to server");
         menu.add(addFriend);
         menu.add(addGroup);
+        menu.add(connect);
         this.setJMenuBar(menuBar);
     }
     
@@ -192,6 +196,10 @@ public class ClientView extends JFrame {
      */
     public void addNewGroupListener(ActionListener e) {
         addGroup.addActionListener(e);
+    }
+    
+    public void addConnectListener(ActionListener e) {
+        connect.addActionListener(e);
     }
     
     public void addTreeListener(MouseAdapter e) {

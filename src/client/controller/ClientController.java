@@ -3,19 +3,28 @@ package client.controller;
 import client.model.Friend;
 import client.model.ListOfFriends;
 import client.view.ClientView;
+import client.view.MessageWindow;
 import client.view.NewFriendWindow;
 import client.view.NewGroupWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTree;
+import protocols.ClientProtocol;
 
 /**
  * Controlls comunication between View and Model
  * @author Janusz Czornik
- * @version 1.0
+ * @version 1.0 
  */
 public class ClientController {
     
@@ -44,6 +53,15 @@ public class ClientController {
      */
     private final NewGroupWindow NGW;
     
+    private final MessageWindow MESSAGE_WINDOW;
+    
+    private Socket socket;
+    
+    private BufferedReader in;
+    
+    private PrintWriter out;
+    
+    private ClientProtocol clientProtocol;
     
     /**
      * Constructor for controller
@@ -56,6 +74,7 @@ public class ClientController {
         this.NFW = new NewFriendWindow();
         this.NGW = new NewGroupWindow();
         GROUPS = new HashSet<>();
+        this.MESSAGE_WINDOW = new MessageWindow();
         
         LIST_OF_FRIENDS.getListOfFriends().stream().forEach((f) -> {
             GROUPS.add(f.getGroup());
@@ -83,9 +102,10 @@ public class ClientController {
         CLIENT_VIEW.addNewFriendListener(new AddNewFriendListener());
         CLIENT_VIEW.addNewGroupListener(new AddNewGroupListener());
         CLIENT_VIEW.addTreeListener(new TreeListener());
+        CLIENT_VIEW.addConnectListener(new ConnectListener());
         
         NFW.addCancelButtonListener(new CancelButtonListenerForNfw());
-    }
+}
     
     
     /**
@@ -147,11 +167,42 @@ public class ClientController {
                         }
                         
                         if(isNode) {
-                            System.out.println(node);
+                            MESSAGE_WINDOW.setVisible(true);
                         }
                     }
                 }
             }
+    }
+    
+    private class ConnectListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                socket = new Socket("127.0.0.1", 4444);
+                out = new PrintWriter(socket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                
+                clientProtocol = new ClientProtocol(out, in);
+                MESSAGE_WINDOW.addSendMessageActionListener(new SendMessageListener());
+            } catch (IOException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
+    private class SendMessageListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                clientProtocol.sendMessage("Cos");
+            } catch (IOException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
     
 }
