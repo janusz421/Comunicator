@@ -51,18 +51,39 @@ public class ClientController {
      */
     private final NewGroupWindow NGW;
     
+    /**
+     * Message window
+     */
     private final MessageWindow MESSAGE_WINDOW;
     
+    /**
+     * socket for comunication
+     */
     private Socket socket;
     
+    /**
+     * Stream in
+     */
     private BufferedReader in;
     
+    /**
+     * Stream out
+     */
     private PrintWriter out;
     
+    /**
+     * Client protocol class
+     */
     private ClientProtocol clientProtocol;
     
+    /**
+     * Server address
+     */
     private final String ADDRESS = "127.0.0.1";
     
+    /**
+     * Server port
+     */
     private final int PORT = 4444;
     
     /**
@@ -149,6 +170,9 @@ public class ClientController {
         
     } 
     
+    /**
+     * Listener for double click on tree
+     */
     private class TreeListener extends MouseAdapter {
         private final JTree tree = CLIENT_VIEW.getTree();
         
@@ -178,6 +202,9 @@ public class ClientController {
             }
     }
     
+    /**
+     * Connection to server action listener
+     */
     private class ConnectListener implements ActionListener {
 
         @Override
@@ -196,6 +223,9 @@ public class ClientController {
         
     }
     
+    /**
+     * Action listener for send button
+     */
     private class SendMessageListener implements ActionListener {
 
         @Override

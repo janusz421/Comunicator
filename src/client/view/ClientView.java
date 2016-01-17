@@ -179,6 +179,10 @@ public class ClientView extends JFrame {
         );
     }
     
+    /**
+     * Return JTree
+     * @return tree
+     */
     public JTree getTree() {
         return this.tree;
     }
@@ -199,14 +203,26 @@ public class ClientView extends JFrame {
         addGroup.addActionListener(e);
     }
     
+    /**
+     * Adding listener to connection
+     * @param e ActionListener
+     */
     public void addConnectListener(ActionListener e) {
         connect.addActionListener(e);
     }
     
+    /**
+     * Ading listener to tree
+     * @param e ActionListener
+     */
     public void addTreeListener(MouseAdapter e) {
         tree.addMouseListener(e);
     }
     
+    /**
+     * Window to display errors
+     * @param errorMessage error to display
+     */
     public void displayErrorMessage(String errorMessage) {
         JOptionPane.showMessageDialog(this, errorMessage);
     }
