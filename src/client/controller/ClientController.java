@@ -16,8 +16,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTree;
 import protocols.ClientProtocol;
 
@@ -62,6 +60,10 @@ public class ClientController {
     private PrintWriter out;
     
     private ClientProtocol clientProtocol;
+    
+    private final String ADDRESS = "127.0.0.1";
+    
+    private final int PORT = 4444;
     
     /**
      * Constructor for controller
@@ -167,7 +169,9 @@ public class ClientController {
                         }
                         
                         if(isNode) {
-                            MESSAGE_WINDOW.setVisible(true);
+                            if(socket != null)
+                                MESSAGE_WINDOW.setVisible(true);
+                            else CLIENT_VIEW.displayErrorMessage("You are not connected to server. Go to: MENU -> Connect to server");
                         }
                     }
                 }
@@ -179,14 +183,14 @@ public class ClientController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                socket = new Socket("127.0.0.1", 4444);
+                socket = new Socket(ADDRESS, PORT);
                 out = new PrintWriter(socket.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 
                 clientProtocol = new ClientProtocol(out, in);
                 MESSAGE_WINDOW.addSendMessageActionListener(new SendMessageListener());
             } catch (IOException ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                CLIENT_VIEW.displayErrorMessage(ex.toString());
             }
         }
         
@@ -197,9 +201,13 @@ public class ClientController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                clientProtocol.sendMessage("Cos");
+                if(!MESSAGE_WINDOW.getMessageToSend().equals("")) {
+                    String respons = clientProtocol.sendMessage(MESSAGE_WINDOW.getMessageToSend());
+                    MESSAGE_WINDOW.addMessageToTextArea(respons);
+                    MESSAGE_WINDOW.clearMessageToSendField();
+                }
             } catch (IOException ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                CLIENT_VIEW.displayErrorMessage(ex.toString());
             }
         }
         

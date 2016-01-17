@@ -6,6 +6,7 @@
 package client.view;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -78,12 +79,20 @@ public class MessageWindow extends javax.swing.JFrame {
     }
     
     public void addMessageToTextArea(String newMessage) {
-        String messages = messageTextArea.getText() + newMessage;
+        String messages = messageTextArea.getText() + newMessage + '\n';
         messageTextArea.setText(messages);
     }
     
     public String getMessageToSend() {
         return newMessageField.getText();
+    }
+    
+    public void clearMessageToSendField() {
+        newMessageField.setText("");
+    }
+    
+    public void displayErrorMessage(String errorMessage) {
+        JOptionPane.showMessageDialog(this, errorMessage);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

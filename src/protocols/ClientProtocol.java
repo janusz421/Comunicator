@@ -17,21 +17,20 @@ import java.io.PrintWriter;
 public class ClientProtocol {
     private final PrintWriter OUT;
     private final BufferedReader IN;
+    private final String EMPTY_STRING = "";
     public ClientProtocol(PrintWriter out, BufferedReader in) {
          OUT = out;
          IN = in;
     }
     
-    public boolean sendMessage(String message) throws IOException {
+    public String sendMessage(String message) throws IOException {
         OUT.println(ProtocolMessages.NEW_MESSAGE);
         if(IN.readLine().equals(ProtocolMessages.WAITING)) {
-            OUT.println(message);
+            OUT.println(message); 
             if(IN.readLine().equals(ProtocolMessages.SUCCESS))
-                return true;
-            else
-                return false;
+                return IN.readLine();
         }
-        else
-            return true;
+        
+        return EMPTY_STRING;
     }
 }
